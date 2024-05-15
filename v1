@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Continuous Scroll Webpage</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .text-box {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        .video-container {
+            position: relative;
+            width: 70%;
+            padding-top: 40%;
+            margin: 2rem 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .side-images {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: 2rem 0;
+        }
+        .side-images a {
+            width: 30%;
+        }
+        .side-images img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .slideshow-container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            margin: 2rem 0;
+        }
+        .slide {
+            display: none;
+        }
+        .slide img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        .dots {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+        .active, .dot:hover {
+            background-color: rgba(255,255,255,1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-box">Text Box at the Beginning</div>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/watch?v=bNPETxYUaKk" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="side-images">
+            <a href="https://link1.com"><img src="image1.jpg" alt="Image 1"></a>
+            <a href="https://link2.com"><img src="image2.jpg" alt="Image 2"></a>
+            <a href="https://link3.com"><img src="image3.jpg" alt="Image 3"></a>
+        </div>
+        <div class="text-box">Text Box in the Middle</div>
+        <div class="slideshow-container">
+            <div class="slide">
+                <img src="slide1.jpg" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="slide2.jpg" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="slide3.jpg" alt="Slide 3">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div class="dots">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+        <div class="text-box">Text Box at the End</div>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
+</body>
+</html>
+
